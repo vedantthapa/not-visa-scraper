@@ -1,9 +1,7 @@
 import json
 import time
-from pprint import pprint
 from random import uniform
 
-from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.common.exceptions import ElementNotInteractableException
 from selenium.webdriver.common.action_chains import ActionChains
