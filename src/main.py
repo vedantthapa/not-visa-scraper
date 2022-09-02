@@ -20,9 +20,10 @@ log_in(driver)
 
 action = ActionChains(driver)
 
-#
+# initialize availability dict
 availability = {}
 
+# get all locations from the dropdown
 location_select = Select(
     driver.find_element(By.ID, "appointments_consulate_appointment_facility_id")
 )
@@ -32,6 +33,7 @@ for option in location_options:
     availability[option.text] = {}
     time.sleep(uniform(2, 4))
 
+    # extract the datepicker element
     datepicker = driver.find_element(By.ID, "appointments_consulate_appointment_date")
     try:
         datepicker.click()
@@ -40,6 +42,8 @@ for option in location_options:
         continue
     time.sleep(uniform(2, 4))
 
+    # initialize a list to store the clickable dates (<a> tags)
+    # initialize a counter to set an upper bound on clicking next
     a_elements_list = []
     next_click_counter = 15
 
@@ -58,8 +62,10 @@ for option in location_options:
         next_click_counter -= 1
 
     if a_elements_list:
+        # select the first date
         a_elements_list[0].click()
     else:
+        # click on a trivial element to close the datepicker
         action.move_to_element(
             driver.find_element(
                 By.XPATH, '//*[@id="appointment-form"]/fieldset/ol/fieldset/legend'
@@ -72,9 +78,11 @@ for option in location_options:
 
     date_val = datepicker.get_attribute("value")
 
+    # extract available time slots for the selected date
     time_select = Select(
         driver.find_element(By.ID, "appointments_consulate_appointment_time")
     )
     availability[option.text][date_val] = time_select.options[1:].text
 
+# send the json to telegram
 send_message(json.dumps(availability))

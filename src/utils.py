@@ -10,13 +10,27 @@ from selenium.webdriver.common.by import By
 load_dotenv()
 
 
-def send_message(text):
+def send_message(text: str):
+    """Sends a message to the chat id specified in the .env file via the telegram bot
+
+    Args:
+        text (str): text to be sent
+
+    Returns:
+        request.response
+    """
     url = f"https://api.telegram.org/bot{os.environ.get('TOKEN')}/sendMessage"
     parameters = {"chat_id": os.environ.get("CHAT_ID"), "text": text}
     return requests.post(url, parameters)
 
 
 def log_in(driver):
+    """Logs into the website using the credentials in the .env file
+
+    Args:
+        driver (selenium.webdriver): driver object to log in
+    """
+
     # Clicking the first prompt, if there is one
     try:
         driver.find_element(By.XPATH, "/html/body/div[6]/div[3]/div/button").click()
