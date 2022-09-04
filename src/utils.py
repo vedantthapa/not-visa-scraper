@@ -1,4 +1,3 @@
-# from pyvirtualdisplay import Display
 import os
 import time
 from random import uniform
