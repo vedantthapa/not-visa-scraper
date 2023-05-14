@@ -1,7 +1,7 @@
+import logging
 import os
 import time
 from random import uniform
-import logging
 
 import requests
 from dotenv import load_dotenv
