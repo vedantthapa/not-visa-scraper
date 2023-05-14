@@ -21,7 +21,7 @@ Download and install the relevant version of [chromedriver](https://chromedriver
 
 There is a `default.env` file that serves as a template for the actual `.env` file. The user is expected to create the `.env` file.
 
-> Note: The `URL_ID` can be obtained from the website URL: https://ais.usvisa-info.com/en-ca/niv/schedule/<YOUR-URL-ID>/appointment
+> Note: The `URL_ID` can be obtained from the website URL: https://ais.usvisa-info.com/en-ca/niv/schedule/\<YOUR-URL-ID\>/appointment
 
 Since the program uses Telegram to send messages, you'll additionally need [create a bot](https://core.telegram.org/bots#how-do-i-create-a-bot) to configure the `CHAT_ID` and `TOKEN` environment variables. Here's a [tutorial](https://medium.com/codex/using-python-to-send-telegram-messages-in-3-simple-steps-419a8b5e5e2).
 
