@@ -42,12 +42,10 @@ def log_in(driver):
         pass
 
     # Filling the user and password
-    user_box = driver.find_element(By.NAME, "user[email]")
-    user_box.send_keys(os.environ.get("USERNAME"))
+    driver.find_element(By.NAME, "user[email]").send_keys(os.environ.get("USERNAME"))
     time.sleep(uniform(2, 4))
 
-    password_box = driver.find_element(By.NAME, "user[password]")
-    password_box.send_keys(os.environ.get("PASSWORD"))
+    driver.find_element(By.NAME, "user[password]").send_keys(os.environ.get("PASSWORD"))
     time.sleep(uniform(2, 4))
 
     # Clicking the checkbox
@@ -60,8 +58,7 @@ def log_in(driver):
     driver.find_element(
         By.XPATH, "/html/body/div[5]/main/div[3]/div/div[1]/div/form/p[1]/input"
     ).click()
-    time.sleep(uniform(1, 2.5))
 
     # Waiting for the page to load.
     # 5 seconds may be ok for a computer, but it doesn't seem enougn for the Raspberry Pi 4.
-    time.sleep(uniform(3, 6))
+    time.sleep(uniform(4, 7))
