@@ -16,19 +16,26 @@ from selenium.webdriver.chrome.options import Options
 from utils import log_in, send_message
 
 load_dotenv()
+URL = f"https://ais.usvisa-info.com/en-ca/niv/schedule/{os.environ.get('URL_ID')}/appointment"
 
-logging.basicConfig(format="%(asctime)s - %(message)s", level=logging.INFO)
+LOG_PATH = "logs.txt"
+
+logging.basicConfig(
+    filename=LOG_PATH,
+    filemode="w",
+    format="%(asctime)s - %(message)s",
+    level=logging.INFO,
+)
 
 script_exec_dt = datetime.datetime.now()
 
-url = f"https://ais.usvisa-info.com/en-ca/niv/schedule/{os.environ.get('URL_ID')}/appointment"
 
 # Setting Chrome options to run the scraper headless.
 chrome_options = Options()
-# chrome_options.add_argument("--headless")
+chrome_options.add_argument("--headless")
 
 driver = webdriver.Chrome(options=chrome_options)
-driver.get(url)
+driver.get(URL)
 logging.info("Driver connected.")
 
 # logging in
@@ -106,10 +113,15 @@ for option in location_options:
     )
     availability[option.text][date_val] = time_select.options[1:].text
 
+with open(LOG_PATH, "r") as f:
+    logs = f.read()
+
 message = f"""
-Script executed at {script_exec_dt}.
+Script execution started at {script_exec_dt}.
 
 Availability JSON: {json.dumps(obj=availability, indent=4, sort_keys=True)}
+
+Logs for the script run: {logs}
 """
 
 # send the json to telegram
