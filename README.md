@@ -1,26 +1,32 @@
 # Visa appointments scraper
-This scraper is made for checking the ais.usvisa-info.com site in time intervals. It logs you in, and scrape the payment site and when there's an available appointment (a change on the original site where there are not appointments) it will notify you through a Telegram bot.
 
-## TODO
-- [x] Function to log in.
-- [x] Add a timestamp to each run.
-- [x] Implement the screenshot.
-- [ ] Add interaction with the bot.
-- [ ] Get the Telegram bot to answer last and next check status.
-- [ ] Add tests.
-- [ ] Add requiriments.
+This scraper is made for checking the ais.usvisa-info.com site in time intervals. It logs you in, and scrapes the website for available appointments and sends a notification via telegram
 
-## Installation
-1. Install chromedriver
-2. Install requirements
+## Setup
 
-## Usage
-Run via SSH on a Raspberry. The process will create a 
-```
-nohup python3 selenium_scraper.py &
+Clone the repo and `cd` into it with:
+
+```sh
+git clone https://github.com/vedantthapa/not-visa-scraper.git
+cd not-visa-scraper
 ```
 
-## Run tests
+Create a virtual environment using a tool of your choice with `Python 3.11.3` and install the project dependencies with:
+
+```sh
+pip install -r requirements.txt
 ```
-python3 -m unittest test_selenium_scraper
+
+Download and install the relevant version of [chromedriver](https://chromedriver.chromium.org/downloads).
+
+There is a `default.env` file that serves as a template for the actual `.env` file. The user is expected to create the `.env` file.
+
+> Note: The `URL_ID` can be obtained from the website URL: https://ais.usvisa-info.com/en-ca/niv/schedule/<YOUR-URL-ID>/appointment
+
+Since the program uses Telegram to send messages, you'll additionally need [create a bot](https://core.telegram.org/bots#how-do-i-create-a-bot) to configure the `CHAT_ID` and `TOKEN` environment variables. Here's a [tutorial](https://medium.com/codex/using-python-to-send-telegram-messages-in-3-simple-steps-419a8b5e5e2).
+
+Run the program with:
+
+```sh
+python src/main.py
 ```
