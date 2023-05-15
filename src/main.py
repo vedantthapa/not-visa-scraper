@@ -16,8 +16,8 @@ from selenium.webdriver.chrome.options import Options
 from utils import log_in, send_message
 
 load_dotenv()
-URL = f"https://ais.usvisa-info.com/en-ca/niv/schedule/{os.environ.get('URL_ID')}/appointment"
 
+URL = f"https://ais.usvisa-info.com/en-ca/niv/schedule/{os.environ.get('URL_ID')}/appointment"
 LOG_PATH = "logs.txt"
 
 logging.basicConfig(
