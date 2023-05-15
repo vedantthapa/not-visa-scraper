@@ -1,5 +1,7 @@
-# OSX
+# Local
 .DS_Store
+chromedriver
+logs.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
