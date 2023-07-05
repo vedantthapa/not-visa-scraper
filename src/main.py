@@ -4,6 +4,7 @@ import logging
 import os
 import time
 from random import uniform
+from pathlib import Path
 
 from dotenv import load_dotenv
 from selenium import webdriver
@@ -18,7 +19,7 @@ from utils import log_in, send_message
 load_dotenv()
 
 URL = f"https://ais.usvisa-info.com/en-ca/niv/schedule/{os.environ.get('URL_ID')}/appointment"
-LOG_PATH = "logs.txt"
+LOG_PATH = Path("logs.txt")
 
 logging.basicConfig(
     filename=LOG_PATH,
@@ -126,3 +127,7 @@ Logs for the script run: {logs}
 
 # send the json to telegram
 send_message(message)
+logging.info("Message sent to Telegram")
+
+# helps in pushing to cron logs
+print(logs)
